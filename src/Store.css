@@ -1,0 +1,14 @@
+.store-map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    gap: 20px;
+}
+
+.store-list {
+    width: 200px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}

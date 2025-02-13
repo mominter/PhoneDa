@@ -1,0 +1,172 @@
+@font-face {
+    font-family: "AggroBfont";
+    src: url("./assets/fonts/SB_Aggro_B.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "AggroMfont";
+    src: url("./assets/fonts/SB_Aggro_M.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "AggroLfont";
+    src: url("./assets/fonts/SB_Aggro_L.ttf") format("truetype");
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.banner {
+    height: 400px;
+}
+
+.item-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ul-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px 0 0 0;
+    list-style-type: none;
+}
+
+.ul-box {
+    background-color: #f0f0f0;
+    width: 250px;
+    height: 500px;
+    margin: 0 10px 0 0;
+    padding: 10px;
+    transition: all 0.3s ease;
+
+    border-radius: 15px;
+}
+
+.ul-photo-box {
+    background-color: #ffffff;
+    width: 250px;
+    height: 320px;
+    margin: 0;
+}
+
+.ul-photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ul-text-box {
+    background-color: #ffffff;
+    width: 250px;
+    height: 160px;
+    margin: 20px 0 0 0;
+    font-family: "ulfont";
+}
+
+.ul-color-box {
+    display: flex;
+    justify-content: left;
+    padding: 10px 0 0 5px;
+}
+
+.ul-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #f0f0f0;
+    margin: 0 0 0 5px;
+}
+
+.ul-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    padding: 20px 0 0 10px;
+}
+
+.ul-pricebox {
+    display: flex;
+    justify-content: left;
+}
+
+.ul-saleprice {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    padding: 15px 0 0 10px;
+
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.ul-modelprice {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
+    padding: 17.5px 10px 0  0;
+
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.ul-order-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 30px;
+    margin: 10px 0 0 80px;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+
+.ul-order-text a {
+    font-size: 16px;
+    font-family: "ulfont";
+    color: red;
+    text-decoration: none;
+}
+
+.ul-order-text:hover {
+    font-size: 16px;
+    font-family: "ulfont";
+    color: red;
+    text-decoration: none;
+}
+
+.ul-order-text:visited {
+    font-size: 16px;
+    font-family: "ulfont";
+    color: red;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .ul-box {
+        width: calc(25%);
+    }
+}
+
+@media (max-width: 768px) {
+    .ul-box {
+        width: calc(33.3%);
+    }
+}
