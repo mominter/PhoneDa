@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import OrderSlider from "./OrderSlider";
 import Dropbox from "./Dropbox";
 import './Order.css';
 
 const Color = ["#8e9fbc", "#b3ab9e", "#4a4a4d", "#d9d9d6"];
-const ColorNames = ["티타늄 실버블루", "티타늄 그레이", "티타늄 블랙", "티타늄 화이트실버"];
 const Types = ["사용하는 번호 그대로 Telecom 통신사로 이동하고 싶어요.", "통신사는 그대로 Telecom 그대로 휴대폰만 바꾸고 싶어요"];
 
 const Bills = [
@@ -22,6 +21,8 @@ function Order() {
         "512GB": 1850000,
     };
 
+    const { phoneName } = useParams();
+
     const [selectImg, setSelectImg] = useState("./assets/images/Silverblue.png");
     const [selectColorName, setSelectColorName] = useState("티타늄 실버블루");
     const [selectStorage, setSelectStorage] = useState("256GB");
@@ -33,14 +34,14 @@ function Order() {
     const [selectService, setSelectService] = useState("제휴카드 할인");
     const [selectInternet, setSelectInternet] = useState("상담신청");
 
-    {/* 휴대폰 가격 설정 */}
+    /* 휴대폰 가격 설정 */
     const normalPrice = prices[selectStorage];
     const monthlyValue = parseInt(selectMonthly.replace("개월", ""), 10);
     const installmentPrice = normalPrice / 2;
     const installmentFee = Math.floor(normalPrice / monthlyValue);
     const monthlyInstallment = Math.floor(installmentFee * 0.8);
 
-    {/* 기기값 할인내역 */}
+    /* 기기값 할인내역 */
     const subsidies = {
         "256GB" : 60000,
         "512GB" : 50000,
@@ -49,7 +50,7 @@ function Order() {
     const promotionDiscount = 20000;
     const totalDiscount = officialSubsidy + promotionDiscount;
 
-    {/* 월 통신내역 */}
+    /* 월 통신내역 */
     const contractDiscount = 0;
     const monthlyPlanFee = parseInt(selectBill.price.replace(/[^\d]/g, ''), 10) - contractDiscount;
     const totalBill = monthlyInstallment + monthlyPlanFee;
@@ -59,7 +60,7 @@ function Order() {
             <div style={{ height: "150vh" }}>
                 <div className="order-box">
                     <div className="order-title-box">
-                        <div className="order-title">갤럭시 S25 Ultra</div>
+                        <div className="order-title">{phoneName}</div>
                     </div>
                     <div className="order-option-box">
                         <div className="order-image-box">
@@ -79,10 +80,10 @@ function Order() {
                                     <div className="order-color-types">
                                         {Color.map((color, index) => (
                                             <div
-                                                key={index}
-                                                className="order-color-type"
-                                                style={{ backgroundColor: color }}
-                                                onClick={() => setSelectColorName(ColorNames[index])}
+                                            key={index}
+                                            className={`order-color-type ${selectColorName === color.name ? "selected" : ""}`}
+                                            style={{ backgroundColor: color.code }}
+                                            onClick={() => setSelectColorName(color.name)}
                                             ></div>
                                         ))}
                                     </div>

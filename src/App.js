@@ -212,7 +212,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order/:phoneName" element={<Order />} />
         <Route path="/galaxy" element={<Galaxy />} />
         <Route path="/Iphone" element={<Iphone />} />
         <Route path="/Watch" element={<Watch />} />

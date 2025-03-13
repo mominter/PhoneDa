@@ -5,17 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const OrderSlider = ({ onImageClick}) => {
-    const images = [
-        "./assets/images/Silverblue.png",
-        "./assets/images/Gray.png",
-        "./assets/images/Black.png",
-        "./assets/images/Whitesilver.png",
-        "./assets/images/Silverblue.png",
-        "./assets/images/Gray.png",
-        "./assets/images/Black.png",
-        "./assets/images/Whitesilver.png"
-    ]
+const OrderSlider = ({ images, onImageClick}) => {
     return (
         <Swiper
             modules={[Autoplay]}

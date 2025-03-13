@@ -1,99 +1,62 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import GalaxyPhones from "./GalaxyPhones";
 import './Galaxy.css';
-
-const galaxyUltra25 = ["#8e9fbc", "#b3ab9e", "#4a4a4d", "#d9d9d6"];
 
 function Galaxy() {
     return (
         <div className="content">
-        <div style={{ height: "200vh" }}>
-            <div className="galaxy-title">
-                갤럭시
+            <div style={{ height: "280vh" }}>
+                <div className="galaxy-title">
+                    갤럭시
+                </div>
+
+                <div className="galaxy-box-container">
+                    <ul className="galaxy-container">
+                        {Object.entries(GalaxyPhones).map(([phoneName, phone], index) => (
+                            <li key={index} className="galaxy-box">
+                                <div className="galaxy-photo-box">
+                                    <img src={phone.mainImage} alt="휴대폰 메인 이미지" />
+                                </div>
+
+                                <div className="galaxy-text-box">
+                                    <div className="galaxy-color-box">
+                                        {phone.colors.map((color, idx) => (
+                                            <div key={idx} className="galaxy-circle" style={{ backgroundColor: color.code }}></div>
+                                        ))}
+                                    </div>
+
+                                    <div className="galaxy-name">{phoneName}</div>
+
+                                    <div className="galaxy-pricebox">
+                                        <div className="galaxy-modelprice">
+                                            <div className="galaxy-span">
+                                            <span>출고가</span><span>{phone.mainPrice.toLocaleString() || "1650000"}원</span>
+                                            </div>
+                                        </div>
+                                        <div className="galaxy-sale">
+                                            <div className="galaxy-span">
+                                            <span>할인</span><span>{phone?.discount?.toLocaleString() || "0"}원</span>
+                                            </div>
+                                        </div>
+                                        <div className="galaxy-saleprice">
+                                            <div className="galaxy-span">
+                                            <span>할인가</span><span>{((phone.mainPrice || 1650000) - (phone?.discount || 0)).toLocaleString()}원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div className="galaxy-order-box">
+                                        <div className="galaxy-order-text">
+                                            <Link to={`/order/${phoneName}`}>주문하기</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-            <div className="item-box-container">
-            <ul className="ul-box-container">
-            <li className="ul-box">
-                <div className="ul-photo-box">
-                    <img src="./assets/images/Black.png" />
-                </div>
-                <div className="ul-text-box">
-                <div className="ul-color-box">
-                    {galaxyUltra25.map((color, index) => (
-                    <div key={index} className="ul-circle" style={{ backgroundColor: color }}></div>
-                    ))}
-                </div>
-                <div className="ul-name">갤럭시 S25 Ultra</div>
-                <div className="ul-pricebox">
-                    <div className="ul-saleprice">1,650,000 원</div>
-                    <div className="ul-modelprice">출고가 1,650,000 원</div>
-                </div>
-                <div className="ul-order-box">
-                    <div className="ul-order-text">
-                    <Link to="/order">주문하기</Link>
-                    </div>
-                </div>
-                </div>
-            </li>
-            <li className="ul-box">
-                <div className="ul-photo-box"></div>
-                <div className="ul-text-box">
-                <div className="ul-color-box">
-                    {galaxyUltra25.map((color, index) => (
-                    <div key={index} className="ul-circle" style={{ backgroundColor: color }}></div>
-                    ))}
-                </div>
-                <div className="ul-name">갤럭시 S25</div>
-                <div className="ul-pricebox">
-                    <div className="ul-saleprice">0 원</div>
-                    <div className="ul-modelprice">출고가 0 원</div>
-                </div>
-                <div className="ul-order-box">
-                    <div className="ul-order-text">
-                    <Link to="/order">주문하기</Link>
-                    </div>
-                </div>
-                </div>
-            </li>
-            <li className="ul-box">
-                <div className="ul-photo-box"></div>
-                <div className="ul-text-box">
-                <div className="ul-color-box">
-                    {galaxyUltra25.map((color, index) => (
-                    <div key={index} className="ul-circle" style={{ backgroundColor: color}}></div>
-                    ))}
-                </div>
-                <div className="ul-name">갤럭시</div>
-                <div className="ul-pricebox">
-                    <div className="ul-saleprice">0 원</div>
-                    <div className="ul-modelprice">출고가 0 원</div>
-                </div>
-                <div className="ul-order-box">
-                    <div className="ul-order-text">주문하기</div>
-                </div>
-                </div>
-            </li>
-            <li className="ul-box">
-                <div className="ul-photo-box"></div>
-                <div className="ul-text-box">
-                <div className="ul-color-box">
-                    {galaxyUltra25.map((color, index) => (
-                    <div key={index} className="ul-circle" style={{ backgroundColor: color}}></div>
-                    ))}
-                </div>
-                <div className="ul-name">갤럭시</div>
-                <div className="ul-pricebox">
-                    <div className="ul-saleprice">0 원</div>
-                    <div className="ul-modelprice">출고가 0 원</div>
-                </div>
-                <div className="ul-order-box">
-                    <div className="ul-order-text">주문하기</div>
-                </div>
-                </div>
-            </li>
-            </ul>
-            </div>
-        </div>
         </div>
     );
 }
