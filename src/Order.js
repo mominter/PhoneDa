@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import OrderSlider from "./OrderSlider";
 import Dropbox from "./Dropbox";
+import GalaxyPhones from "./GalaxyPhones";
+import IPhones from "./IPhones";
 import './Order.css';
 
-const Color = ["#8e9fbc", "#b3ab9e", "#4a4a4d", "#d9d9d6"];
 const Types = ["사용하는 번호 그대로 Telecom 통신사로 이동하고 싶어요.", "통신사는 그대로 Telecom 그대로 휴대폰만 바꾸고 싶어요"];
 
 const Bills = [
@@ -16,26 +17,22 @@ const Bills = [
 ];
 
 function Order() {
-    const prices ={
-        "256GB": 1650000,
-        "512GB": 1850000,
-    };
-
     const { phoneName } = useParams();
+    const phoneData = GalaxyPhones[phoneName] || IPhones[phoneName];
 
-    const [selectImg, setSelectImg] = useState("./assets/images/Silverblue.png");
-    const [selectColorName, setSelectColorName] = useState("티타늄 실버블루");
-    const [selectStorage, setSelectStorage] = useState("256GB");
-    const [selectTelecom, setSelectTelecom] = useState("SKT");
-    const [selectType, setSelectType] = useState("번호이동");
-    const [selectMonthly, setSelectMonthly] = useState("24개월");
+    const [selectImg, setSelectImg] = useState(phoneData.colors[0].image);
+    const [selectColorName, setSelectColorName] = useState(phoneData.colors[0].name);
+    const [selectStorage, setSelectStorage] = useState(Object.keys(phoneData.storage)[0]);
+    const [selectTelecom, setSelectTelecom] = useState(phoneData.telecom[0]);
+    const [selectType, setSelectType] = useState(phoneData.type[0]);
+    const [selectMonthly, setSelectMonthly] = useState(phoneData.monthly[0]);
     const [selectBill, setSelectBill] = useState(Bills[0]);
     const [selectSale, setSelectSale] = useState("공시지원할인\n총 0원");
-    const [selectService, setSelectService] = useState("제휴카드 할인");
-    const [selectInternet, setSelectInternet] = useState("상담신청");
+    const [selectService, setSelectService] = useState(phoneData.service[0]);
+    const [selectInternet, setSelectInternet] = useState(phoneData.internet[0]);
 
     /* 휴대폰 가격 설정 */
-    const normalPrice = prices[selectStorage];
+    const normalPrice = Object.values(phoneData.storage)[0] || 0;
     const monthlyValue = parseInt(selectMonthly.replace("개월", ""), 10);
     const installmentPrice = normalPrice / 2;
     const installmentFee = Math.floor(normalPrice / monthlyValue);
@@ -43,6 +40,7 @@ function Order() {
 
     /* 기기값 할인내역 */
     const subsidies = {
+        "128GB" : 70000,
         "256GB" : 60000,
         "512GB" : 50000,
     };
@@ -52,6 +50,7 @@ function Order() {
 
     /* 월 통신내역 */
     const contractDiscount = 0;
+    // const monthlyPlanFee = selectBill.pirce - contractDiscount;
     const monthlyPlanFee = parseInt(selectBill.price.replace(/[^\d]/g, ''), 10) - contractDiscount;
     const totalBill = monthlyInstallment + monthlyPlanFee;
 
@@ -65,10 +64,16 @@ function Order() {
                     <div className="order-option-box">
                         <div className="order-image-box">
                             <div className="order-image-main">
-                                <img src={selectImg} alt="갤럭시 S25 Ultra" />
+                                <img src={selectImg} alt="휴대폰 메인 이미지" />
                             </div>
+                            
                             <div className="order-slider-box">
-                                <OrderSlider onImageClick={setSelectImg} />
+                                <OrderSlider 
+                                    images={[
+                                        ...phoneData.colors.map(color => color.image), 
+                                        ...phoneData.colors.map(color => color.image)
+                                    ]}
+                                    onImageClick={setSelectImg} />
                             </div>
                         </div>
                         <dl className="order-list">
@@ -78,7 +83,7 @@ function Order() {
                                 <dt className="order-titles">색상</dt>
                                 <dd className="order-content-color">
                                     <div className="order-color-types">
-                                        {Color.map((color, index) => (
+                                        {phoneData.colors.map((color, index) => (
                                             <div
                                             key={index}
                                             className={`order-color-type ${selectColorName === color.name ? "selected" : ""}`}
@@ -95,7 +100,7 @@ function Order() {
                             <div className="order-item">
                                 <dt className="order-titles">용량</dt>
                                 <dd className="order-contents">
-                                    {["256GB", "512GB"].map((storage) => (
+                                    {Object.keys(phoneData.storage).map((storage) => (
                                         <label
                                             key={storage}
                                             className={`order-button ${selectStorage === storage ? "order-button-selected" : ""}`}
@@ -117,7 +122,7 @@ function Order() {
                             <div className="order-item">
                                 <dt className="order-titles">통신사</dt>
                                 <dd className="order-contents">
-                                    {["SKT", "KT", "LG U+"].map((telecom) => (
+                                    {phoneData.telecom.map((telecom) => (
                                         <label
                                             key={telecom}
                                             className={`order-button ${selectTelecom === telecom ? "order-button-selected" : ""}`}
@@ -140,7 +145,7 @@ function Order() {
                                 <dt className="order-titles">가입 유형</dt>
                                 <dd className="order-content-type">
                                     <div className="order-color-types">
-                                        {["번호이동", "기기변경"].map((type) => (
+                                        {phoneData.type.map((type) => (
                                             <label
                                                 key={type}
                                                 className={`order-button ${selectType === type ? "order-button-selected" : ""}`}
@@ -166,7 +171,7 @@ function Order() {
                             <div className="order-item">
                                 <dt className="order-titles">할부개월</dt>
                                 <dd className="order-contents">
-                                    {["24개월", "30개월", "36개월"].map((monthly) => (
+                                    {phoneData.monthly.map((monthly) => (
                                         <label
                                             key={monthly}
                                             className={`order-button ${selectMonthly === monthly ? "order-button-selected" : ""}`}
@@ -224,7 +229,7 @@ function Order() {
                             <div className="order-item">
                                 <dt className="order-titles">추가할인</dt>
                                 <dd className="order-contents">
-                                    {["제휴카드 할인", "결합 할인", "복지 할인"].map((service) => (
+                                    {phoneData.service.map((service) => (
                                         <label
                                             key={service}
                                             className={`order-button ${selectService === service ? "order-button-selected" : ""}`}
@@ -246,7 +251,7 @@ function Order() {
                             <div className="order-item">
                                 <dt className="order-titles">인터넷+TV</dt>
                                 <dd className="order-contents">
-                                    {["상담신청", "신청안함"].map((internet) => (
+                                    {phoneData.internet.map((internet) => (
                                         <label
                                             key={internet}
                                             className={`order-button ${selectInternet === internet ? "order-button-selected" : ""}`}

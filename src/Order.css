@@ -154,7 +154,6 @@
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
     font-family: "buttonfont";
     margin: auto 3px;
     position: flex;
