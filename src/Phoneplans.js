@@ -44,6 +44,10 @@ const Phoneplans = {
         { name: "5G 시니어 B형", price: 43000, call: "무제한", sms: "무제한", data: "10GB" },
         { name: "5G 시니어 C형", price: 39000, call: "무제한", sms: "무제한", data: "10GB" },
     ],
+
+    Watch: [
+        { name: "LTE Wearable", price: 11000, call: "50분", sms: "250건", data: "250MB" }
+    ]
 };
 
 export default Phoneplans;

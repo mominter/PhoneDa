@@ -27,7 +27,8 @@ const Dropbox = ({ Bills, selectBill, setSelectBill }) => {
                             <div className="bill-name">
                                 {bill.name} <span className="bill-price">₩{bill.price.toLocaleString()}</span></div>
                             <div className="bill-info">
-                                <span>📞 무제한</span>
+                                <span>📞 {bill.call}</span>
+                                <span>💬 {bill.sms}</span>
                                 <span>📶 {bill.data}</span>
                             </div>
                         </li>

@@ -10,6 +10,7 @@ function Navbar() {
             <Link to="/iphone" className="left-text">아이폰</Link>
             <Link to="/watch" className="left-text">워치</Link>
             <a href="https://example.com" className="left-text">인터넷+TV</a>
+            <Link to ="/Store" className="left-text">지점 찾기</Link>
             </div>
             
             <Link to="/">
@@ -17,7 +18,7 @@ function Navbar() {
             </Link>
 
             <div className="right-link">
-            <Link to="/Store" className="right-text">고객센터</Link>
+            <Link to="/Store" className="right-text">고객센터</Link> {/* Customer */}
             <Link to="/Member" className="right-text">회원가입</Link>
             <Link to="/Login" className="right-text">로그인</Link>
             </div>

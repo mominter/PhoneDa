@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const OrderSlider = ({ images, onImageClick}) => {
+const OrderSlider = ({ images, onImageClick }) => {
     return (
         <Swiper
             modules={[Autoplay]}

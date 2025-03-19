@@ -6,9 +6,9 @@ import './Iphone.css';
 function Iphone() {
     return (
         <div className="content">
-        <div style={{ height: "280vh" }}>
+            <div style={{ height: "280vh" }}>
                 <div className="iphone-title">
-                    아이폰폰
+                    아이폰
                 </div>
 
                 <div className="iphone-box-container">

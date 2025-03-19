@@ -1,15 +1,156 @@
-@font-face {
-    font-family: "watch";
-    src: url("./assets/fonts/SB_Aggro_B.ttf") format("truetype");
-}
-
-.watch-title {
+.galaxyw-title {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 50px 0 50px 0;
 
-    font-family: "watch";
+    font-family: "AggroBfont";
     font-size: 36px;
+}
+
+.galaxyw-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.galaxyw-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px 0 0 0;
+    list-style-type: none;
+}
+
+.galaxyw-box {
+    background-color: #f0f0f0;
+    width: 250px;
+    height: 570px;
+    margin: 0 10px 10px 0;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.galaxyw-photo-box {
+    background-color: #ffffff;
+    width: 250px;
+    height: 320px;
+    margin: 0;
+}
+
+.galaxyw-photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galaxyw-text-box {
+    background-color: #ffffff;
+    width: 250px;
+    height: 230px;
+    margin: 20px 0 0 0;
+    font-family: "AggroLfont";
+}
+
+.galaxyw-color-box {
+    display: flex;
+    justify-content: left;
+    padding: 10px 0 0 5px;
+}
+
+.galaxyw-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #f0f0f0;
+    margin: 0 0 0 5px;
+}
+
+.galaxyw-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    padding: 20px 0 0 10px;
+}
+
+.galaxyw-pricebox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.galaxyw-span {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.galaxyw-modelprice {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    padding: 15px 0 0 0;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.galaxyw-sale {
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+    padding: 10px 0 0  0;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.galaxyw-saleprice {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    padding: 10px 0 0 0;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.galaxyw-order-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 30px;
+    margin: 25px 0 0 80px;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+
+.galaxyw-order-text a {
+    font-size: 16px;
+    font-family: "AggroLfont";
+    color: red;
+    text-decoration: none;
+}
+
+.galaxyw-order-text:hover {
+    font-size: 16px;
+    font-family: "AggroLfont";
+    color: red;
+    text-decoration: none;
+}
+
+.galaxyw-order-text:visited {
+    font-size: 16px;
+    font-family: "AggroLfont";
+    color: red;
+    text-decoration: none;
 }

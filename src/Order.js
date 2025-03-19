@@ -4,21 +4,30 @@ import OrderSlider from "./OrderSlider";
 import Dropbox from "./Dropbox";
 import GalaxyPhones from "./GalaxyPhones";
 import IPhones from "./IPhones";
+import GalaxyWatches from "./GalaxyWatches";
+import Phoneplans from "./Phoneplans";
 import './Order.css';
 
 const Types = ["사용하는 번호 그대로 Telecom 통신사로 이동하고 싶어요.", "통신사는 그대로 Telecom 그대로 휴대폰만 바꾸고 싶어요"];
 
-const Bills = [
-    { name: "5G 시그니처", price: "130,000", data: "무제한"},
-    { name: "5G 프리미어 슈퍼", price: "115,000", data: "무제한"},
-    { name: "5G 프리미어 플러스", price: "105,000", data: "무제한"},
-    { name: "5G 프리미어 레귤러", price: "95,000", data: "무제한"},
-    { name: "5G 프리미어 에센셜", price: "85,000", data: "무제한"},
-];
-
 function Order() {
     const { phoneName } = useParams();
-    const phoneData = GalaxyPhones[phoneName] || IPhones[phoneName];
+    const phoneData = GalaxyPhones[phoneName] || IPhones[phoneName] || GalaxyWatches[phoneName] || {};
+
+    /* 이미지 클릭 핸들러 */
+    const handleImageClick = (clickImage) => {
+        const matchedColor = phoneData.colors.find(color => color.image === clickImage);
+        if (matchedColor) {
+            setSelectColorName(matchedColor.name);
+            setSelectImg(matchedColor.image);
+        }
+    }
+
+    /* 통신사 클릭 핸들러 */
+    const handleTelecomChange = (clickTelecom) => {
+        setSelectTelecom(clickTelecom);
+        setSelectBill(Phoneplans[clickTelecom]?.[0] || null);
+    }
 
     const [selectImg, setSelectImg] = useState(phoneData.colors[0].image);
     const [selectColorName, setSelectColorName] = useState(phoneData.colors[0].name);
@@ -26,20 +35,24 @@ function Order() {
     const [selectTelecom, setSelectTelecom] = useState(phoneData.telecom[0]);
     const [selectType, setSelectType] = useState(phoneData.type[0]);
     const [selectMonthly, setSelectMonthly] = useState(phoneData.monthly[0]);
-    const [selectBill, setSelectBill] = useState(Bills[0]);
+    const [selectBill, setSelectBill] = useState(Phoneplans[selectTelecom]?.[0] || null);
     const [selectSale, setSelectSale] = useState("공시지원할인\n총 0원");
     const [selectService, setSelectService] = useState(phoneData.service[0]);
     const [selectInternet, setSelectInternet] = useState(phoneData.internet[0]);
 
+    const typeIndex = ["번호이동", "기기변경"].indexOf(selectType);
+    const selectedTypeText = typeIndex !== -1 ? Types[typeIndex].replace("Telecom", selectTelecom) : "";
+
     /* 휴대폰 가격 설정 */
     const normalPrice = Object.values(phoneData.storage)[0] || 0;
-    const monthlyValue = parseInt(selectMonthly.replace("개월", ""), 10);
+    const monthlyValue = parseInt((selectMonthly || "").replace("개월", ""), 10);
     const installmentPrice = normalPrice / 2;
     const installmentFee = Math.floor(normalPrice / monthlyValue);
     const monthlyInstallment = Math.floor(installmentFee * 0.8);
 
     /* 기기값 할인내역 */
     const subsidies = {
+        "32GB" : 20000,
         "128GB" : 70000,
         "256GB" : 60000,
         "512GB" : 50000,
@@ -50,8 +63,7 @@ function Order() {
 
     /* 월 통신내역 */
     const contractDiscount = 0;
-    // const monthlyPlanFee = selectBill.pirce - contractDiscount;
-    const monthlyPlanFee = parseInt(selectBill.price.replace(/[^\d]/g, ''), 10) - contractDiscount;
+    const monthlyPlanFee = selectBill.price - contractDiscount;
     const totalBill = monthlyInstallment + monthlyPlanFee;
 
     return (
@@ -73,7 +85,7 @@ function Order() {
                                         ...phoneData.colors.map(color => color.image), 
                                         ...phoneData.colors.map(color => color.image)
                                     ]}
-                                    onImageClick={setSelectImg} />
+                                    onImageClick={handleImageClick} />
                             </div>
                         </div>
                         <dl className="order-list">
@@ -88,7 +100,10 @@ function Order() {
                                             key={index}
                                             className={`order-color-type ${selectColorName === color.name ? "selected" : ""}`}
                                             style={{ backgroundColor: color.code }}
-                                            onClick={() => setSelectColorName(color.name)}
+                                            onClick={() => {
+                                                setSelectColorName(color.name);
+                                                setSelectImg(color.image);
+                                            }}
                                             ></div>
                                         ))}
                                     </div>
@@ -132,7 +147,7 @@ function Order() {
                                                 name="telecom"
                                                 value={telecom}
                                                 checked={selectTelecom === telecom}
-                                                onChange={() => setSelectTelecom(telecom)}
+                                                onChange={() => handleTelecomChange(telecom)}
                                             />
                                             {telecom}
                                         </label>
@@ -162,7 +177,9 @@ function Order() {
                                         ))}
                                     </div>
                                     <div className="order-type-choice">
-                                        {selectType && Types[["번호이동", "기기변경"].indexOf(selectType)].replace("Telecom", selectTelecom)}
+                                        {/* {selectType && Types[["번호이동", "기기변경"].indexOf(selectType)].replace("Telecom", selectTelecom)} */}
+                                        {/* {selectType && (Types[["번호이동", "기기변경"].indexOf(selectType)] || "").replace("Telecom", selectTelecom)} */}
+                                        {selectedTypeText}
                                     </div>
                                 </dd>
                             </div>
@@ -194,7 +211,7 @@ function Order() {
                                 <dt className="order-titles">요금제 선택</dt>
                                 <dd className="order-content-type">
                                     <div className="order-color-types">
-                                        <Dropbox Bills={Bills} selectBill={selectBill} setSelectBill={setSelectBill} />
+                                        <Dropbox Bills={Phoneplans[selectTelecom]} selectBill={selectBill} setSelectBill={setSelectBill} />
                                     </div>
                                 </dd>
                             </div>
@@ -274,11 +291,11 @@ function Order() {
                             <div className="order-bill-box">
                                 <div className="order-bill-item">
                                     <span>정상가</span>
-                                    <span>{normalPrice.toLocaleString()}원</span>
+                                    <span>{(normalPrice || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>할부원금</span>
-                                    <span>{installmentPrice.toLocaleString()}원</span>
+                                    <span>{(installmentPrice || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>할부개월</span>
@@ -286,46 +303,46 @@ function Order() {
                                 </div>
                                 <div className="order-bill-item">
                                     <span>할부수수료</span>
-                                    <span>{installmentFee.toLocaleString()}원</span>
+                                    <span>{(installmentFee || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>월 할부금</span>
-                                    <span>{monthlyInstallment.toLocaleString()}원</span>
+                                    <span>{(monthlyInstallment || 0).toLocaleString()}원</span>
                                 </div>
                             </div>
                             <div className="order-sale-box">
                                 <div className="order-calc-title">기기값 할인 내역</div>
                                 <div className="order-bill-item">
                                     <span>공시지원금</span>
-                                    <span>{officialSubsidy.toLocaleString()}원</span>
+                                    <span>{(officialSubsidy || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>프로모션할인</span>
-                                    <span>{promotionDiscount.toLocaleString()}원</span>
+                                    <span>{(promotionDiscount || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>총 할인금액</span>
-                                    <span>{totalDiscount.toLocaleString()}원</span>
+                                    <span>{(totalDiscount || 0).toLocaleString()}원</span>
                                 </div>
                             </div>
                             <div className="order-fee-box">
                                 <div className="order-calc-title">월 통신내역</div>
                                 <div className="order-bill-item">
                                     <span>기본료</span>
-                                    <span>{selectBill.price.toLocaleString()}원</span>
+                                    <span>{(selectBill.price || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>선택약정할인</span>
-                                    <span>{contractDiscount.toLocaleString()}원</span>
+                                    <span>{(contractDiscount || 0).toLocaleString()}원</span>
                                 </div>
                                 <div className="order-bill-item">
                                     <span>월 통신요금</span>
-                                    <span>{monthlyPlanFee.toLocaleString()}원</span>
+                                    <span>{(monthlyPlanFee || 0).toLocaleString()}원</span>
                                 </div>
                             </div>
                             <div className="order-total-box">
                                 <div className="order-total-item">월 예상납부금액</div>
-                                <div className="order-total-item">{totalBill.toLocaleString()}원</div>
+                                <div className="order-total-item">{(totalBill || 0).toLocaleString()}원</div>
                             </div>
                             <button className="order-request">
                                 <Link to="/Request"
