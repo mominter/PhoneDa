@@ -1,0 +1,120 @@
+.agree-content {
+    margin-top: 180px;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.agree-title {
+    display: flex;
+    justify-content: center;
+    font-family: "AggroLfont";
+    font-weight: bold;
+    font-size: 18px;
+    margin: 30px 0;
+}
+
+.agree-checkes {
+    font-family: "AggroLfont";
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.checkbox-container input[type="checkbox"] {
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+.checkbox-container input[type="checkbox"]::after {
+    content: "✔";
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    line-height: 1;
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+    opacity: 1;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.all-agree {
+    background: #ffffff;
+    font-weight: "AggroLfont";
+    font-size: 16px;
+    justify-content: flex-start;
+}
+
+.required {
+    color: red;
+    font-family: "AggroLfont";
+    margin-right: 5px;
+}
+
+.view-link {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+.view-link:hover {
+    text-decoration: underline;
+}
+
+.submit {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "AggroLfont";
+    font-weight: bold;
+    color: white;
+    background: gray;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    margin-top: 15px;
+}
+
+.submit:enabled {
+    background: #d32f2f;
+    color: white;
+    cursor: pointer;
+}

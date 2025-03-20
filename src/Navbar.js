@@ -19,7 +19,7 @@ function Navbar() {
 
             <div className="right-link">
             <Link to="/Store" className="right-text">고객센터</Link> {/* Customer */}
-            <Link to="/Member" className="right-text">회원가입</Link>
+            <Link to="/Agree" className="right-text">회원가입</Link>
             <Link to="/Login" className="right-text">로그인</Link>
             </div>
         </div>

@@ -5,6 +5,7 @@ import Order from "./Order";
 import Galaxy from "./Galaxy";
 import Iphone from "./Iphone";
 import Watch from "./Watch";
+import Agree from "./Agree";
 import Member from "./Member";
 import Login from "./Login";
 import Request from "./Request";
@@ -217,6 +218,7 @@ function App() {
         <Route path="/Iphone" element={<Iphone />} />
         <Route path="/Watch" element={<Watch />} />
         <Route path="/Store" element={<Store />} />
+        <Route path="/Agree" element={<Agree />} />
         <Route path="/Member" element={<Member />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Request" element={<Request />} />
