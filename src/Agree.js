@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Agree.css';
 import Modal from './Modal';
 
@@ -50,7 +51,11 @@ function Agree() {
                         <label htmlFor="terms">
                             <span className="required">(필수)</span> 사이트 이용약관
                         </label>
-                        <a href="#" className="view-link" onClick={(e) => {e.preventDefault(); openModal("사이트 이용약관", "여기에 이용약관 내용을 입력하세요.")}}>내용보기</a>
+                        <button
+                            className="view-link"
+                            onClick={() => openModal("사이트 이용약관", "여기에 이용약관 내용을 입력하세요.")}>
+                            내용보기
+                        </button>
                     </div>
 
                     <div className="checkbox-container">
@@ -63,14 +68,18 @@ function Agree() {
                         <label htmlFor="privacy">
                             <span className="required">(필수)</span> 개인정보 수집 및 이용 동의
                         </label>
-                        <a href="#" className="view-link" onClick={(e) => {e.preventDefault(); openModal("개인정보 수집 및 이용 동의", "여기에 이용 동의 내용을 입력하세요.")}}>내용보기</a>
+                        <button
+                            className="view-link"
+                            onClick={() => openModal("개인정보 수집 및 이용 동의", "여기에 이용 동의 내용을 입력하세요.")}>
+                            내용보기
+                        </button>
                     </div>
 
                     <button
                         className={`submit ${allChecked ? "active" : ""}`}
-                        disable={!allChecked}
+                        disabled={!allChecked}
                     >
-                        동의하고 가입하기
+                        {allChecked ? <Link to="/Member">동의하고 가입하기</Link> : "동의하고 가입하기"}
                     </button>
                 </div>
             </div>

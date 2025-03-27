@@ -89,14 +89,22 @@
 }
 
 .view-link {
-    font-size: 14px;
-    color: #007bff;
+    all: unset;
+    background: none;
+    border: none;
+    color: blue;
     text-decoration: none;
+    cursor: pointer;
+    font-size: inherit;
+    display: inline;
     margin-left: auto;
 }
 
-.view-link:hover {
-    text-decoration: underline;
+.view-link:hover,
+.view-link:focus {
+    background: none;
+    color: blue;
+    outline: none;
 }
 
 .submit {
@@ -111,6 +119,10 @@
     border-radius: 5px;
     cursor: not-allowed;
     margin-top: 15px;
+}
+
+.submit:disabled {
+    cursor: default;
 }
 
 .submit:enabled {
