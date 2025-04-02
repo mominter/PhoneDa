@@ -9,7 +9,7 @@ const Dropbox = ({ Bills, selectBill, setSelectBill }) => {
             {/* 요금제 선택 */}
             <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
                 <span>{selectBill.name}</span>
-                <span>{selectBill.price.toLocaleString()}</span>
+                <span>{selectBill?.price?.toLocaleString() ?? "0"}</span>
                 <span className={`arrow ${isOpen ? "open" : ""}`}>&#9662;</span>
             </div>
 

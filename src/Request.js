@@ -1,34 +1,27 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Request.css";
 
 function Request() {
     const location = useLocation();
-    const {
-        normalPrice,
-        installmentPrice,
-        selectMonthly,
-        installmentFee,
-        monthlyInstallment,
-        officialSubsidy,
-        promotionDiscount,
-        totalDiscount,
-        contractDiscount,
-        selectBill,
-        totalBill
-    } = location.state || {};
+    const data = location.state || {};
+    const phoneData = data.phoneData ? JSON.parse(data.phoneData) : {};
+    const phoneName = data.phoneName || "기본모델";
+
+    console.log("넘어온 데이터1:", data);
+    console.log("넘어온 데이터2:", phoneData);
 
     return(
         <div className="request-content">
             <div className="request-box">
                 <div className="request-title-box">
-                    <div className="request-title">갤럭시 S25 Ultra</div>
+                    <div className="request-title">{phoneName}</div>
                 </div>
                 <div className="request-info-content">
                     <div className="request-info-box">
                         <div className="request-image-box">
                             <div className="request-image-main">
-                                <img src="./assets/images/Silverblue.png" alt="갤럭시 S25 Ultra" />
+                                <img src={data.selectImg} alt="갤럭시 S25 Ultra" />
                             </div>
                             <div className="request-image-name">
                                 갤럭시 S25 Ultra
@@ -139,58 +132,58 @@ function Request() {
                         <div className="request-bill-box">
                             <div className="request-bill-item">
                                 <span>정상가</span>
-                                <span>{normalPrice ? normalPrice.toLocaleString() : "0원"}원</span>
+                                <span>{data.normalPrice ? data.normalPrice.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>할부원금</span>
-                                <span>{installmentPrice ? installmentPrice.toLocaleString() : "0원"}원</span>
+                                <span>{data.installmentPrice ? data.installmentPrice.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>할부개월</span>
-                                <span>{selectMonthly || "0개월"}</span>
+                                <span>{data.selectMonthly || "0개월"}</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>할부수수료</span>
-                                <span>{installmentFee ? installmentFee.toLocaleString() : "0원"}원</span>
+                                <span>{data.installmentFee ? data.installmentFee.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>월 할부금</span>
-                                <span>{monthlyInstallment ? monthlyInstallment.toLocaleString() : "0원"}원</span>
+                                <span>{data.monthlyInstallment ? data.monthlyInstallment.toLocaleString() : "0원"}원</span>
                             </div>
                         </div>
                         <div className="request-sale-box">
                             <div className="request-calc-title">기기값 할인 내역</div>
                             <div className="request-bill-item">
                                 <span>공시지원금</span>
-                                <span>{officialSubsidy ? officialSubsidy.toLocaleString() : "0원"}원</span>
+                                <span>{data.officialSubsidy ? data.officialSubsidy.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>프로모션할인</span>
-                                <span>{promotionDiscount ? promotionDiscount.toLocaleString() : "0원"}원</span>
+                                <span>{data.promotionDiscount ? data.promotionDiscount.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>총 할인금액</span>
-                                <span>{totalDiscount ? totalDiscount.toLocaleString() : "0원"}원</span>
+                                <span>{data.totalDiscount ? data.totalDiscount.toLocaleString() : "0원"}원</span>
                             </div>
                         </div>
                         <div className="request-fee-box">
                             <div className="request-calc-title">월 통신내역</div>
                             <div className="request-bill-item">
                                 <span>기본료</span>
-                                <span>{selectBill ? selectBill.price.toLocaleString() : "0원"}원</span>
+                                <span>{data.selectBill ? data.selectBill.price.toLocaleString() : "0원"}원</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>선택약정할인</span>
-                                <span>{contractDiscount ? contractDiscount.toLocaleString() : "0원"}</span>
+                                <span>{data.contractDiscount ? data.contractDiscount.toLocaleString() : "0원"}</span>
                             </div>
                             <div className="request-bill-item">
                                 <span>월 통신요금</span>
-                                <span>{totalBill ? totalBill.toLocaleString() : "0원"}원</span>
+                                <span>{data.totalBill ? data.totalBill.toLocaleString() : "0원"}원</span>
                             </div>
                         </div>
                         <div className="request-total-box">
                             <div className="request-total-item">월 예상납부금액</div>
-                            <div className="request-total-item">{totalBill ? totalBill.toLocaleString() : "0원"}원</div>
+                            <div className="request-total-item">{data.totalBill ? data.totalBill.toLocaleString() : "0원"}원</div>
                         </div>
                     </div>
                 </div>
